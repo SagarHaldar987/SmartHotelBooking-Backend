@@ -41,5 +41,4 @@ namespace SmartHotelBooking.Repositories.Implementations
             await _context.SaveChangesAsync();
         }
     }
-
 }

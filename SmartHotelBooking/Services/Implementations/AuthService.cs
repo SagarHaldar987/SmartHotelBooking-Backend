@@ -39,7 +39,8 @@ namespace SmartHotelBooking.Services
                 Name = user.Name,
                 Email = user.Email,
                 Role = user.Role,
-                Token = token
+                Token = token,
+                UserId = user.UserId // ✅ Include userId here
             };
         }
 
@@ -66,5 +67,4 @@ namespace SmartHotelBooking.Services
             };
         }
     }
-
 }

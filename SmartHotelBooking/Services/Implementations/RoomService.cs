@@ -38,6 +38,8 @@ namespace SmartHotelBooking.Services.Implementations
         public async Task<RoomDTO> CreateRoomAsync(CreateRoomDto roomDto)
         {
             var room = _mapper.Map<Room>(roomDto);
+            room.ManagerId = roomDto.ManagerID; // ✅ Assign Manager ID
+
             await _roomRepository.AddAsync(room);
             await _roomRepository.SaveChangesAsync();
             return _mapper.Map<RoomDTO>(room);

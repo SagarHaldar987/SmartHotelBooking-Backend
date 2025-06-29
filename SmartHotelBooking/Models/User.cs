@@ -15,7 +15,7 @@ public partial class User
 
     public string? Role { get; set; }
 
-    public string ContactNumber { get; set; }
+    public string? ContactNumber { get; set; }
 
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 

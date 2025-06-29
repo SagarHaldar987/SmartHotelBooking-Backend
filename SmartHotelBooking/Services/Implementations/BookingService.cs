@@ -35,45 +35,12 @@ namespace SmartHotelBooking.Services.Implementations
             var bookings = await _bookingRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<BookingDTO>>(bookings);
         }
-        //p
-        //public async Task<IEnumerable<BookingDTO>> GetBookingsByUserIdAsync(int userId)
-        //{
-        //    var bookings = await _bookingRepository.GetBookingsByUserIdAsync(userId);
-        //    return _mapper.Map<IEnumerable<BookingDTO>>(bookings);
-        //}
-        //p
 
-
-        //a
         public async Task<IEnumerable<BookingDTO>> GetBookingsByUserIdAsync(int userId)
         {
             var bookings = await _bookingRepository.GetBookingsByUserIdAsync(userId);
             return _mapper.Map<IEnumerable<BookingDTO>>(bookings);
         }
-        //a
-
-        //public async Task<BookingDTO> CreateBookingAsync(CreateBookingDto bookingDto)
-        //{
-        //    var room = await _roomRepository.GetByIdAsync(bookingDto.RoomID);
-        //    if (room == null || (room.Availability.HasValue && !room.Availability.Value))
-
-        //    {
-        //        throw new Exception("Room is not available for booking.");
-        //    }
-
-        //    var booking = _mapper.Map<Booking>(bookingDto);
-        //    await _bookingRepository.AddAsync(booking);
-        //    await _bookingRepository.SaveChangesAsync();
-
-        //    // ✅ Update room availability after booking
-        //    room.Availability = false; // Room is now booked
-        //    _roomRepository.Update(room);
-        //    await _roomRepository.SaveChangesAsync();
-
-        //    return _mapper.Map<BookingDTO>(booking);
-        //}
-
-        //new added
 
 
         public async Task<BookingDTO> CreateBookingAsync(CreateBookingDto bookingDto, int userId)
@@ -108,11 +75,11 @@ namespace SmartHotelBooking.Services.Implementations
 
             // Mark room as unavailable
 
-            room.Availability = false;
+            //room.Availability = false;
 
             await _bookingRepository.AddAsync(booking);
 
-            _bookingRepository.UpdateRoom(room); // Add this method to repository
+            //_bookingRepository.UpdateRoom(room); // Add this method to repository
 
             await _bookingRepository.SaveChangesAsync();
 

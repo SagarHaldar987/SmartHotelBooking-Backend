@@ -11,5 +11,11 @@ namespace SmartHotelBooking.Repositories.Interfaces
         void Update(Payment payment);
         void Delete(Payment payment);
         Task SaveChangesAsync();
+
+        // ✅ Add these methods for new logic
+        Task<Booking> GetBookingByIdAsync(int bookingId);
+        Task<Room> GetRoomByIdAsync(int roomId);
+        void UpdateRoom(Room room);
+        void UpdateBooking(Booking booking);
     }
 }

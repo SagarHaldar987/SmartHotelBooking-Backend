@@ -92,7 +92,6 @@ public partial class HotelBookingContext : DbContext
             entity.Property(e => e.Amount).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.BookingId).HasColumnName("BookingID");
             entity.Property(e => e.PaymentMethod).HasMaxLength(50);
-            entity.Property(e => e.Status).HasMaxLength(50);
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
             entity.HasOne(d => d.Booking).WithMany(p => p.Payments)

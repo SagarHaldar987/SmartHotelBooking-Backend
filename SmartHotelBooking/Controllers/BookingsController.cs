@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 using SmartHotelBooking.DTOs;
 using SmartHotelBooking.Services.Interfaces;
 
@@ -8,6 +9,7 @@ namespace SmartHotelBooking.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowFrontend")]
     public class BookingsController : ControllerBase
     {
         private readonly IBookingService _bookingService;
@@ -44,10 +46,5 @@ namespace SmartHotelBooking.Controllers
             var bookings = await _bookingService.GetBookingsByUserIdAsync(userId);
             return Ok(bookings);
         }
-
-        // ❌ This method allows access to other users' bookings and should be removed.
-        //[HttpGet("user/{userId}")]
-        //[Authorize(Roles = "User,Manager")]
-        //public async Task<IActionResult> GetUserBookings(int userId) => Ok(await _bookingService.GetBookingsByUserIdAsync(userId));
     }
 }

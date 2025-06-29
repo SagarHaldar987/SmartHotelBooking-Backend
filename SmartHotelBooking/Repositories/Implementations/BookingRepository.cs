@@ -19,9 +19,14 @@ namespace SmartHotelBooking.Repositories.Implementations
         public async Task<IEnumerable<Booking>> GetAllAsync() =>
             await _context.Bookings.ToListAsync();
 
+        //public async Task<IEnumerable<Booking>> GetBookingsByUserIdAsync(int userId) =>
+        //    await _context.Bookings.Where(b => b.UserId == userId).ToListAsync();
         public async Task<IEnumerable<Booking>> GetBookingsByUserIdAsync(int userId) =>
-            await _context.Bookings.Where(b => b.UserId == userId).ToListAsync();
-        //a
+        await _context.Bookings
+        .Where(b => b.UserId == userId && b.Status == true)
+        .ToListAsync();
+
+
         public async Task<IEnumerable<Booking>> GetBookingsByRoomIdAsync(int roomId)
 
         {
@@ -41,13 +46,11 @@ namespace SmartHotelBooking.Repositories.Implementations
             _context.Rooms.Update(room);
 
         }
-        //a
-        //a
+        
         public async Task<Room> GetRoomByIdAsync(int roomId)
         {
             return await _context.Rooms.FirstOrDefaultAsync(r => r.RoomId == roomId);
         }
-        //a
 
         public async Task AddAsync(Booking booking) =>
             await _context.Bookings.AddAsync(booking);
@@ -60,9 +63,6 @@ namespace SmartHotelBooking.Repositories.Implementations
 
         public async Task SaveChangesAsync() =>
             await _context.SaveChangesAsync();
-
-
-
 
     }
 }

@@ -15,7 +15,7 @@ public partial class Booking
 
     public DateOnly? CheckOutDate { get; set; }
 
-    public string? Status { get; set; }
+    public bool Status { get; set; } = false; // ✅ Changed from string to boolean
 
     public int? HotelID { get; set; }
 

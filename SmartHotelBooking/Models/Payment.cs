@@ -13,7 +13,7 @@ public partial class Payment
 
     public decimal? Amount { get; set; }
 
-    public string? Status { get; set; }
+    //public string? Status { get; set; }
 
     public string? PaymentMethod { get; set; }
 

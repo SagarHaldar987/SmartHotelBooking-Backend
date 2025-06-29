@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 using SmartHotelBooking.DTOs;
 using SmartHotelBooking.Services.Interfaces;
 
@@ -7,6 +8,7 @@ namespace SmartHotelBooking.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowFrontend")]
     public class PaymentsController : ControllerBase
     {
         private readonly IPaymentService _paymentService;

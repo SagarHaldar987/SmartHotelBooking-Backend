@@ -35,13 +35,41 @@ namespace SmartHotelBooking.Services.Implementations
             return _mapper.Map<IEnumerable<PaymentDTO>>(payments);
         }
 
+        //public async Task<PaymentDTO> CreatePaymentAsync(CreatePaymentDto paymentDto)
+        //{
+        //    var payment = _mapper.Map<Payment>(paymentDto);
+        //    await _paymentRepository.AddAsync(payment);
+        //    await _paymentRepository.SaveChangesAsync();
+        //    return _mapper.Map<PaymentDTO>(payment);
+        //}
         public async Task<PaymentDTO> CreatePaymentAsync(CreatePaymentDto paymentDto)
         {
             var payment = _mapper.Map<Payment>(paymentDto);
+
+            // Save payment first
             await _paymentRepository.AddAsync(payment);
             await _paymentRepository.SaveChangesAsync();
+
+            // Now update Booking.Status = true and Room.Availability = false
+            var booking = await _paymentRepository.GetBookingByIdAsync(payment.BookingId.Value);
+            if (booking != null)
+            {
+                booking.Status = true;
+                var room = await _paymentRepository.GetRoomByIdAsync(booking.RoomId.Value);
+                if (room != null)
+                {
+                    room.Availability = false;
+                    _paymentRepository.UpdateRoom(room);
+                }
+
+                _paymentRepository.UpdateBooking(booking);
+                await _paymentRepository.SaveChangesAsync();
+            }
+
             return _mapper.Map<PaymentDTO>(payment);
         }
+
+
 
         public async Task<bool> UpdatePaymentAsync(int paymentId, UpdatePaymentDto paymentDto)
         {

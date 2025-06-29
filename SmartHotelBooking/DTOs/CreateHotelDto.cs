@@ -6,16 +6,16 @@ namespace SmartHotelBooking.DTOs
     {
         //public int HotelID { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Required]
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         [Required]
         public int ManagerID { get; set; }
 
         [Required]
-        public string Amenities { get; set; }
+        public string? Amenities { get; set; }
 
 
         [Range(0, 5)]

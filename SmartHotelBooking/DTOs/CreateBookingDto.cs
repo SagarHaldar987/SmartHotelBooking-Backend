@@ -9,8 +9,8 @@
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
 
-        //public bool Status { get; set; } = false;
-        
+        public bool Status { get; set; } = false;
+
         //public int? PaymentID { get; set; }
     }
 }

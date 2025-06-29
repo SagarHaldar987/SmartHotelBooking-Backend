@@ -132,6 +132,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage(); // ? Shows full 500 error
 }
 
 app.UseStaticFiles();

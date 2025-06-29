@@ -73,13 +73,7 @@ namespace SmartHotelBooking.Services.Implementations
 
             booking.HotelID = room.HotelId;
 
-            // Mark room as unavailable
-
-            //room.Availability = false;
-
             await _bookingRepository.AddAsync(booking);
-
-            //_bookingRepository.UpdateRoom(room); // Add this method to repository
 
             await _bookingRepository.SaveChangesAsync();
 

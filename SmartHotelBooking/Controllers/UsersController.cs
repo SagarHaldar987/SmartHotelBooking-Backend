@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using SmartHotelBooking.DTOs;
 using SmartHotelBooking.Services.Interfaces;
@@ -7,6 +8,7 @@ namespace SmartHotelBooking.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowFrontend")]
     //[Authorize(Roles = "Admin")] // Only Admins can update or delete users
     public class UserController : ControllerBase
     {

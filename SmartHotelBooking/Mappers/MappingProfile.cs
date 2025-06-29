@@ -31,7 +31,9 @@ namespace SmartHotelBooking.Mappers
             CreateMap<Booking, BookingDTO>().ReverseMap();
             CreateMap<CreateBookingDto, Booking>()
             .ForMember(dest => dest.CheckInDate, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.CheckInDate)))
-            .ForMember(dest => dest.CheckOutDate, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.CheckOutDate)));
+            .ForMember(dest => dest.CheckOutDate, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.CheckOutDate)))
+            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status)); // ✅ ADD THIS
+
 
             // Payments
             CreateMap<Payment, PaymentDTO>().ReverseMap();

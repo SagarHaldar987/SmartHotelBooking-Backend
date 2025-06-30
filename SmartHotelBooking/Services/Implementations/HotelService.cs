@@ -77,28 +77,60 @@ namespace SmartHotelBooking.Services.Implementations
 
         public async Task<bool> UpdateHotelAsync(int hotelId, int managerId, UpdateHotelDto dto)
         {
+
+            // Check if manager exists
+            var managerExists = await _context.Users.AnyAsync(u => u.UserId == managerId);
+            if (!managerExists)
+                return false;
+
+
             var hotel = await _context.Hotels
                 .FirstOrDefaultAsync(h => h.HotelId == hotelId && h.ManagerId == managerId);
 
             if (hotel == null)
                 return false;
 
-            _mapper.Map(dto, hotel);  
-            await _context.SaveChangesAsync();
-            return true;
+            _mapper.Map(dto, hotel);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateException)
+            {
+                // Log or handle exception
+                return false;
+            }
+
         }
 
         public async Task<bool> DeleteHotelAsync(int hotelId, int managerId)
         {
             var hotel = await _context.Hotels
+                .Include(h=>h.Rooms)
                 .FirstOrDefaultAsync(h => h.HotelId == hotelId && h.ManagerId == managerId);
 
             if (hotel == null)
                 return false;
 
+
+            if (hotel.Rooms.Any())
+                return false; // Or return a custom message like "Hotel has rooms and cannot be deleted."
+
             _context.Hotels.Remove(hotel);
-            await _context.SaveChangesAsync();
-            return true;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateException)
+            {
+                // Log or handle exception
+                return false;
+            }
+
         }
     }
 }

@@ -18,6 +18,20 @@ namespace SmartHotelBooking.Controllers
             _hotelService = hotelService;
         }
 
+
+        [HttpGet("{hotelId}")]
+        [Authorize(Roles = "User,Manager")]
+        public async Task<IActionResult> GetHotelById(int hotelId)
+        {
+            var hotel = await _hotelService.GetHotelByIdAsync(hotelId);
+
+            if (hotel == null)
+                return NotFound(new { Message = "Hotel not found" });
+
+            return Ok(hotel);
+        }
+
+
         [HttpGet]
         [Authorize(Roles = "User,Manager")]
         public async Task<IActionResult> GetAll() => Ok(await _hotelService.GetAllHotelsAsync());

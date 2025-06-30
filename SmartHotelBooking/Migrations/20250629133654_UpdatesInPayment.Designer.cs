@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartHotelBooking.Models;
 
@@ -11,9 +12,11 @@ using SmartHotelBooking.Models;
 namespace SmartHotelBooking.Migrations
 {
     [DbContext(typeof(HotelBookingContext))]
-    partial class HotelBookingContextModelSnapshot : ModelSnapshot
+    [Migration("20250629133654_UpdatesInPayment")]
+    partial class UpdatesInPayment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -402,7 +405,6 @@ namespace SmartHotelBooking.Migrations
                     b.HasOne("SmartHotelBooking.Models.Hotel", "Hotel")
                         .WithMany("Rooms")
                         .HasForeignKey("HotelId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("FK__Rooms__HotelID__3D5E1FD2");
 
                     b.HasOne("SmartHotelBooking.Models.User", "Manager")

@@ -64,6 +64,7 @@ namespace SmartHotelBooking.Controllers
 
 
         [HttpPut("{hotelId}/manager/{managerId}")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> UpdateHotel(int hotelId, int managerId, UpdateHotelDto dto)
         {
             var result = await _hotelService.UpdateHotelAsync(hotelId, managerId, dto);
@@ -74,8 +75,10 @@ namespace SmartHotelBooking.Controllers
         }
 
         [HttpDelete("{hotelId}/manager/{managerId}")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> DeleteHotel(int hotelId, int managerId)
         {
+
             var result = await _hotelService.DeleteHotelAsync(hotelId, managerId);
             if (!result)
                 return NotFound(new { Message = "Hotel not found or unauthorized" });

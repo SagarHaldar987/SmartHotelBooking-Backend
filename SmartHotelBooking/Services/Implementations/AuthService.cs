@@ -8,25 +8,16 @@ using SmartHotelBooking.Repositories.Interfaces;
 using SmartHotelBooking.Services.Interfaces;
 
 namespace SmartHotelBooking.Services
-
 {
-
     public class AuthService : IAuthService
-
     {
-
         private readonly IUserRepository _userRepository;
-
         private readonly IJwtService _jwtService;
 
         public AuthService(IUserRepository userRepository, IJwtService jwtService)
-
         {
-
             _userRepository = userRepository;
-
             _jwtService = jwtService;
-
         }
 
         public async Task<AuthResponseDto> LoginAsync(LoginDto loginDto)

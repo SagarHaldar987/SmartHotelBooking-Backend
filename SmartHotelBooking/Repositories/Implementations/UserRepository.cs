@@ -23,10 +23,11 @@ namespace SmartHotelBooking.Repositories.Implementations
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
-        public async Task AddAsync(User user)
+        public async Task<User> AddAsync(User user)
         {
-            _context.Users.Add(user);
+            await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+            return user;
         }
 
         public async Task UpdateAsync(User user)

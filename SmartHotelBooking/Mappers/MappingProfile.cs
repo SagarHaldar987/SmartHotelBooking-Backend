@@ -28,12 +28,13 @@ namespace SmartHotelBooking.Mappers
             CreateMap<UpdateRoomDto, Room>().ReverseMap();
 
             // Bookings
-            CreateMap<Booking, BookingDTO>().ReverseMap();
-            CreateMap<CreateBookingDto, Booking>()
-            .ForMember(dest => dest.CheckInDate, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.CheckInDate)))
-            .ForMember(dest => dest.CheckOutDate, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.CheckOutDate)))
-            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status)); // ✅ ADD THIS
-
+            CreateMap<Booking, BookingDTO>()
+     .ForMember(dest => dest.HotelName, opt => opt.MapFrom(src => src.Room.Hotel.Name))
+     .ForMember(dest => dest.RoomType, opt => opt.MapFrom(src => src.Room.Type))
+     .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status ? "Confirmed" : "Cancelled"))
+     .ReverseMap();
+            CreateMap<CreateBookingDto, Booking>().ReverseMap();
+            CreateMap<UpdateBookingDto, Booking>().ReverseMap();
 
             // Payments
             CreateMap<Payment, PaymentDTO>().ReverseMap();

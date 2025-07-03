@@ -9,6 +9,8 @@
         public DateOnly CheckInDate { get; set; }
         public DateOnly CheckOutDate { get; set; }
         public string? Status { get; set; }
-        
+
+        public string? HotelName { get; set; }  // ✅ New
+        public string? RoomType { get; set; }   // ✅ New
     }
 }

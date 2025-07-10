@@ -99,7 +99,6 @@ namespace SmartHotelBooking.Services.Implementations
             }
             catch (DbUpdateException)
             {
-                // Log or handle exception
                 return false;
             }
 

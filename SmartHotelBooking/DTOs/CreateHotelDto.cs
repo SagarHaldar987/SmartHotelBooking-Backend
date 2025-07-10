@@ -4,7 +4,6 @@ namespace SmartHotelBooking.DTOs
 {
     public class CreateHotelDto
     {
-        //public int HotelID { get; set; }
         [Required]
         public string? Name { get; set; }
 
@@ -19,9 +18,8 @@ namespace SmartHotelBooking.DTOs
 
 
         [Range(0, 5)]
-
         public decimal Rating { get; set; }
 
-        public IFormFile? Image { get; set; } // ✅ For image upload
+        public IFormFile? Image { get; set; }
     }
 }

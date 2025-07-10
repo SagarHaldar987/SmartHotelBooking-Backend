@@ -19,20 +19,6 @@ namespace SmartHotelBooking.Controllers
             _bookingService = bookingService;
         }
 
-        // ✅ Secure Create Booking - attaches userId from token
-        //[HttpPost]
-        //[Authorize(Roles = "User")]
-        //public async Task<IActionResult> Create(CreateBookingDto dto)
-        //{
-        //    var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-        //    if (userIdClaim == null)
-        //        return Unauthorized("User ID not found in token.");
-
-        //    int userId = int.Parse(userIdClaim.Value);
-        //    var result = await _bookingService.CreateBookingAsync(dto, userId);
-        //    return Ok(result);
-        //}
-
         [HttpPost]
         [Authorize(Roles = "User")]
         public async Task<IActionResult> Create(CreateBookingDto dto)
@@ -55,8 +41,6 @@ namespace SmartHotelBooking.Controllers
             }
         }
 
-
-        // ✅ Secure "My Bookings" - always uses logged-in user's ID
         [HttpGet("my")]
         [Authorize(Roles = "User")]
         public async Task<IActionResult> GetMyBookings()
